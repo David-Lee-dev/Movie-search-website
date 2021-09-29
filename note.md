@@ -359,7 +359,7 @@ npm init -y
 > npm install vue-router@4
 > ```
 
-### 2.3.2 router-link
+### 2.3.2 router-link (RouterLink)
 
 > ``a``태그 대신해서 링크 연결을 제공하는 Vue-router의 태그. 실질적으로는 ``a``태그로 변환되어 출력된다.
 >
@@ -429,4 +429,102 @@ npm init -y
 > ```
 >
 > index.js에 해당 정보를 저장해두었다. Home, About, Movie에 해당하는 Vue 파일들이 route되는 페이지에 해당한다.
+
+<br>
+
+## 2.2 v-model
+
+> ```vue
+> <template>
+>   <h1> {{ msg }} </h1>
+>   <input
+>   	type="text"
+>   	:value="msg" />
+> </template>
+> 
+> <script>
+> export default {
+>   data(){
+>     return {
+>       msg: 'Hello'
+>     }
+>   }
+> }
+> ```
+>
+> ``msg``라는 데이터를 ``input`` 태그와 ``h1``태그의 데이터로 사용하고 있다. 이는 단방향 데이터 바인딩에 해당한다. 브라우저에서 ``input``요소를 통해 데이터를 수정하여도 데이터가 갱신되지 않는다.
+>
+> ```vue
+> <template>
+>   <h1> {{ msg }} </h1>
+>   <input
+>   	type="text"
+>   	:value="msg" 
+>   	@input="change"/>
+> </template>
+> 
+> <script>
+> export default {
+>   data(){
+>     return {
+>       msg: 'Hello'
+>     }
+>   },
+>   methods: {
+>     change(e) {
+>       console.log(e.target)
+>       this.msg = e.target.value
+>     }
+>   }
+> }
+> ```
+>
+> ``change``라는 메서드를 이용해서 ``input``요소의 데이터 변화를 ``msg``에도 할당해준다. 즉 script 안의 ``msg``라는 데이터가 ``input``태그와 ``h1``태그에 영향을 주고,  브라우저에서 ``input``요소를 통한 데이터 변화가 ``change``메서드를 통해 script 내부의 ``msg``데이터에도 영향을 주게 된다. -> 양방향 데이터 바인딩
+>
+> <br>
+>
+> Vue.js에서는 이러한 양방향 데이터 바인딩을 손 쉽게 이용할 수 있는 방법을 제공한다.
+>
+> ### in-line 방식
+>
+> ```vue
+> <template>
+>   <h1> {{ msg }} </h1>
+>   <input
+>   	type="text"
+>   	:value="msg" 
+>   	@input="msg = &event.target.value"/>
+> </template>
+> 
+> <script>
+> export default {
+>   data(){
+>     return {
+>       msg: 'Hello'
+>     }
+>   }
+> }
+> ```
+>
+> ### v-model
+>
+> ```vue
+> <template>
+>   <h1> {{ msg }} </h1>
+>   <input
+>   	type="text"
+>   	v-model="msg" />
+> </template>
+> 
+> <script>
+> export default {
+>   data(){
+>     return {
+>       msg: 'Hello'
+>     }
+>   }
+> }
+> ```
+
+<br>
 
