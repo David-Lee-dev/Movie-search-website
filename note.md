@@ -528,3 +528,83 @@ npm init -y
 
 <br>
 
+# 3. Search bar
+
+## 3.3 상태관리 - Store
+
+``props``나 ``project/inject``를 이용해서 컴포넌트 간 데이터 공유가 가능하지만 프로젝트가 거대해질 수록 코드가 복잡해지고 유지보수가 어렵다. 이런 점을 해결하기 위해서 Vuex라는 상태관리 패턴 라이브러리를 사용할 수 있다. Vuex에서 사용하는 패턴인  Store는 여러 모듈을 이용해 데이터를 관리하여 모든 컴포넌트에서 쉽게 데이터를 사용할 수 있다.
+
+### 3.3.1 Store 초기 설정
+
+> ### Store 기본 구성하기
+>
+> ```js
+> import {
+>   createStore
+> } from 'vuex'
+> import movie from './movie'
+> import about from './about'
+> export default createStore({
+>   modules: {
+>     movie,
+>     about
+>   }
+> })
+> ```
+>
+> Store의 기본 구성을 설정한 코드이다. Store의 내부에서도 모듈을 이용해서 데이터를 관리할 수 있는데, 위 코드에서는 ``movie``와 ``about``이라는 모듈을 이용해서 프로젝트에서 사용할 데이터를 관리한다. 이렇게 Store의 기본 구성을 마치고 나면
+>
+> ```js
+> import {
+>   createApp
+> } from 'vue'
+> // ...
+> import store from './store/index.js'
+> createApp(App)
+>   .use(router)
+>   .use(store)
+>   .mount('#app')
+> ```
+>
+> Store의 기본 구성 JS파일을 import 해주고 ``use``메서드를 이용해서 사용함을 명시해준다.
+
+### 3.3.2 Store 모듈의 속성
+
+> - namespaced : Store 내부에서 모듈로 사용할 수 있는지 여부. true / false
+> - state : 컴포넌트의 script에서 data와 대응하는 것으로 볼 수 있다. 즉, 데이터(vuex에서는 상태)를 의미. **함수 이용해서 객체 데이터를 반환해줘야 한다.**
+> - getters : computed 속성처럼 **상태(state)를 활용해서** 계산된 데이터를 만드는 속성. state 매개변수를 받아서 state의 데이터를 사용한다고 따로 명시를 해줘야 한다.
+>
+> ```js
+> //example
+> //...
+> getters: {
+>     [이름](state) {
+>         return state.[데이터].([메서드])
+>     }
+> }
+> ```
+>
+> - mutations : 메서드처럼 활용 가능. mutations에서만 데이터를 변경할 수 있다. **(다른 속성에서 데이터를 수정할 수 없다.)**
+>
+> ```js
+> //example
+> //...
+> mutations: {
+>     [이름](state) {
+>         state.[데이터] = [원하는 데이터로 변경]
+>     }
+> }
+> ```
+>
+> - actions : 메서드처럼 활용 가능. 하지만 mutations처럼 데이터를 수정할 수 없다. 비동기로 데이터를 처리하도록 구성이 되어 있다.
+>
+> ```js
+> actions: {
+>     [이름](context, (매개변ㅅ)) {
+>     	// state를 직접 활용할 수 없고, context라는 객체 데이터를 이용한다.
+>     	// context는 state 뿐만 아니라, getters와 mutations를 활용하기 위한 commit을 제공한다.
+>         context[속성] = [변경 내용]
+>     }
+> }
+> ```
+
