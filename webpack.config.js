@@ -10,7 +10,7 @@ const {
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', 'scss'],
     alias: {
       '~': path.resolve(__dirname, 'src'),
       'assets': path.resolve(__dirname, 'src/assets')
