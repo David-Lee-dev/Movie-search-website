@@ -530,11 +530,11 @@ npm init -y
 
 # 3. Search bar
 
-## 3.3 상태관리 - Store
+## 3.1 상태관리 - Store
 
 ``props``나 ``project/inject``를 이용해서 컴포넌트 간 데이터 공유가 가능하지만 프로젝트가 거대해질 수록 코드가 복잡해지고 유지보수가 어렵다. 이런 점을 해결하기 위해서 Vuex라는 상태관리 패턴 라이브러리를 사용할 수 있다. Vuex에서 사용하는 패턴인  Store는 여러 모듈을 이용해 데이터를 관리하여 모든 컴포넌트에서 쉽게 데이터를 사용할 수 있다.
 
-### 3.3.1 Store 초기 설정
+### 3.1.1 Store 초기 설정
 
 > ### Store 기본 구성하기
 >
@@ -568,7 +568,7 @@ npm init -y
 >
 > Store의 기본 구성 JS파일을 import 해주고 ``use``메서드를 이용해서 사용함을 명시해준다.
 
-### 3.3.2 Store 모듈의 속성
+### 3.1.2 Store 모듈의 속성
 
 > - namespaced : Store 내부에서 모듈로 사용할 수 있는지 여부. true / false
 > - state : 컴포넌트의 script에서 data와 대응하는 것으로 볼 수 있다. 즉, 데이터(vuex에서는 상태)를 의미. **함수 이용해서 객체 데이터를 반환해줘야 한다.**
@@ -608,3 +608,60 @@ npm init -y
 > }
 > ```
 
+<br>
+
+## 3.2  동기 / 비동기
+
+> [정리글](https://velog.io/@main_string/JS-Promise)
+
+<br>
+
+## 3.3  자동 줄바꿈으로 인한 영역 확대 방지
+
+```css
+.info {
+    background-color: rgba($red, 0.7);
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    text-align: center;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+  }
+```
+
+![image-20211001101038372](note.assets/image-20211001101038372.png)
+
+텍스트가 길어져서 줄바꿈으로 인해 정해놓은 영역이 커졌다.
+
+```css
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+```
+
+[white-space mdn](https://developer.mozilla.org/ko/docs/Web/CSS/white-space)
+
+[text-overflow mdn](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow)
+
+![image-20211001101928258](note.assets/image-20211001101928258.png)
+
+위의 세 속성을 조합하여 줄바꿈 방지, 넘치는 부분 숨김 처리를 할 수 있다.
+
+<br>
+
+## 3.4 마우스 올리면 테두리 표시하기
+
+```scss
+&:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 6px solid $primary;
+```
+
+before와 after 모두 동일안 결과를 얻을 수 있다. absolute를 사용하기 때문에 부모요소 위로 표기되기 때문이다.
