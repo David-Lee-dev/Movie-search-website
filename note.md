@@ -665,3 +665,22 @@ npm init -y
 ```
 
 before와 after 모두 동일안 결과를 얻을 수 있다. absolute를 사용하기 때문에 부모요소 위로 표기되기 때문이다.
+
+마우스를 올렸을 때만  after로 요소 뒤에 새로운  요소가 생성되기 때문에 애니메이션을 적용시키기 위해서 다음과 같이 코드를 수정했다.
+
+```css
+  .after {
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 6px solid $primary;
+    transition: opacity 0.25s;
+    &:hover {
+      opacity: 1;
+    }
+```
+
