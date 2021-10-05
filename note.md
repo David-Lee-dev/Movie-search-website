@@ -1,4 +1,4 @@
-# 1. 프로젝트 생성
+# f1. 프로젝트 생성
 
 ## 1.1 npm 프로젝트 생성
 
@@ -682,5 +682,50 @@ before와 after 모두 동일안 결과를 얻을 수 있다. absolute를 사용
     &:hover {
       opacity: 1;
     }
+```
+
+# 4. Plugin 만들어 적용하기
+
+## 4.1 Plugin 생성
+
+```js
+//src/pulgins/loadImage.js
+
+export default {
+  install(app) {
+    app.config.globalProperties.$loadImage = src => {
+      return new Promise(resolve => {
+        const img = document.createElement('img')
+        img.src = src
+        img.addEventListener('load', () => {
+          resolve()
+        })
+      })
+    }
+  }
+}
+```
+
+## 4.2 Plugin 등록
+
+```js
+//src/main.js
+/...
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(install) // 등록
+  .mount('#app')
+```
+
+## 4.3 사용 예
+
+```vue
+methods: {
+    async init() {
+        await this.$loadImage(this.movie.Poster);
+        this.imageLoading = false;
+    },
+},
 ```
 

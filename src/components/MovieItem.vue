@@ -1,5 +1,9 @@
 <template>
-  <div class="movie" :style="{ backgroundImage: `url(${movie.Poster})` }">
+  <RouterLink
+    :to="`/movie/${movie.imdbID}`"
+    class="movie"
+    :style="{ backgroundImage: `url(${movie.Poster})` }"
+  >
     <Loader v-if="imageLoading" :size="1.5" absolute />
     <div class="after"></div>
     <div class="info">
@@ -10,7 +14,7 @@
         {{ movie.Title }}
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script>

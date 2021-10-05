@@ -5,6 +5,7 @@ import {
 import Home from './Home'
 import About from './About'
 import Movie from './Movie'
+import NotFound from './NotFound'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -20,6 +21,10 @@ export default createRouter({
     {
       path: '/movie/:id',
       component: Movie
+    },
+    {
+      path: '/:notFound(.*)',
+      component: NotFound
     }
   ]
 })
