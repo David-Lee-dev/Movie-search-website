@@ -1,5 +1,6 @@
 <template>
   <Header />
+  <!-- 라우터에서 랜더링해주는 페이지를 보여주는 컴포넌트 -->
   <RouterView />
   <Footer />
 </template>
@@ -17,5 +18,4 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "~/scss/main";
 </style>

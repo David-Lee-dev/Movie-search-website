@@ -9,6 +9,11 @@ import NotFound from './NotFound'
 
 export default createRouter({
   history: createWebHashHistory(),
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  },
   // 웹사이트 페이지 구분
   routes: [{
       path: '/',

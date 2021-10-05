@@ -8,24 +8,13 @@
     <div>{{ blog }}</div>
     <div>{{ phone }}</div>
   </div>
-  <Footer></Footer>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   computed: {
-    name() {
-      return this.$store.state.about.name;
-    },
-    email() {
-      return this.$store.state.about.email;
-    },
-    blog() {
-      return this.$store.state.about.blog;
-    },
-    phone() {
-      return this.$store.state.about.phone;
-    },
+    ...mapState("about", ["name", "email", "blog", "phone"]),
   },
 };
 </script>
