@@ -8,7 +8,7 @@ export default {
   state: () => ({
     movies: [],
     message: _defaultMessage,
-    loading: false,
+    // loading: false,
     theMovie: {}
   }),
   getters: {},
@@ -21,15 +21,15 @@ export default {
     resetMoives(state) {
       state.movies = []
       state.message = _defaultMessage
-      state.loading = false
+      // state.loading = false
     }
   },
   actions: {
     async searchMovies(context, payload) {
-      if (context.state.loading) return
+      // if (context.state.loading) return
       context.commit('updateState', {
         message: '',
-        loading: true
+        // loading: true
       })
       try {
         const res = await _fetchMovie({
@@ -45,7 +45,6 @@ export default {
         })
         const total = parseInt(totalResults, 10)
         const pageLength = Math.ceil(total / 10)
-
         if (pageLength > 1) {
           for (let page = 2; page <= pageLength; page += 1) {
             if (page > (payload.number / 10)) break
@@ -71,15 +70,15 @@ export default {
         })
       } finally {
         context.commit('updateState', {
-          loading: false
+          // loading: false
         })
       }
     },
     async searchMovieWithId(context, payload) {
-      if (context.state.loading) return
+      // if (context.state.loading) return
       context.commit('updateState', {
         theMovie: {},
-        loading: true
+        // loading: true
       })
       try {
         const res = await _fetchMovie(payload)
@@ -92,7 +91,7 @@ export default {
         })
       } finally {
         context.commit('updateState', {
-          loading: false
+          // loading: false
         })
       }
     }

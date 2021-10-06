@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <template v-if="loading">
+    <!-- <template v-if="loading"> -->
+    <template>
       <div class="skeletons">
         <div class="skeleton poster"></div>
         <div class="specs">
@@ -12,16 +13,16 @@
           <div class="skeleton etc"></div>
         </div>
       </div>
-      <Loader :size="3" :z-index="9" fixed />
+      <!-- <Loader :size="3" :z-index="9" fixed /> -->
     </template>
-    <div v-else class="movie-details">
+    <div class="movie-details">
       <div
         class="poster"
         :style="{
           backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})`,
         }"
       >
-        <Loader v-if="imageLoading" absolute :zIndex="3" />
+        <!-- <Loader v-if="imageLoading" absolute :zIndex="3" /> -->
       </div>
       <div class="specs">
         <div class="title">{{ theMovie.Title }}</div>
@@ -72,24 +73,24 @@
 </template>
 
 <script>
-import Loader from "~/components/Loader";
+// import Loader from "~/components/Loader";
 
 export default {
-  components: {
-    Loader,
-  },
-  data() {
-    return {
-      imageLoading: true,
-    };
-  },
+  // components: {
+  //   Loader,
+  // },
+  // data() {
+  //   return {
+  //     imageLoading: true,
+  //   };
+  // },
   computed: {
     theMovie() {
       return this.$store.state.movie.theMovie;
     },
-    loading() {
-      return this.$store.state.movie.loading;
-    },
+    // loading() {
+    //   return this.$store.state.movie.loading;
+    // },
   },
   created() {
     this.$store.dispatch("movie/searchMovieWithId", {
@@ -99,12 +100,12 @@ export default {
   methods: {
     requestDiffSizeImage(url, size = 700) {
       if (!url || url === "N/A") {
-        this.imageLoading = false;
+        // this.imageLoading = false;
         return "";
       }
       const src = url.replace("SX300", `SX${size}`);
       this.$loadImage(src).then(() => {
-        this.imageLoading = false;
+        // this.imageLoading = false;
       });
       return src;
     },
