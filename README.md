@@ -29,13 +29,9 @@
 
 <br /><br />
 
-## 3.  라이브러리
 
-## ![](https://img.shields.io/badge/-fullscreen.js-orange?&logo=javascript&logoColor=white) 
 
-<br /><br />
-
-## 4. 주요 페이지
+## 3. 주요 페이지
 
 |                         메인 페이지                          |
 | :----------------------------------------------------------: |
